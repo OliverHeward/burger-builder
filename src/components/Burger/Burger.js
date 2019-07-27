@@ -1,8 +1,10 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import classes from './Burger.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const burger = (props) => {
+    console.log(props);
     // Transforming state object into array through Object.keys
     let transformedIngredients = Object.keys(props.ingredients).map(igKey => {
             // Spread operatorer for Array passing ingredients by Key and mapping within map.
@@ -28,4 +30,4 @@ const burger = (props) => {
     );
 };
 
-export default burger;
+export default withRouter(burger);
