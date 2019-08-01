@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import axios from '../../../axios-orders';
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
@@ -102,7 +104,7 @@ class ContactData extends Component {
             formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
         }
         const order = {
-            ingredients: this.props.ingredients,
+            ingredients: this.props.ings,
             price: this.props.price,
             orderData: formData
         }
@@ -120,15 +122,17 @@ class ContactData extends Component {
         let isValid = true;
 
         if (rules.required) {
-            // if value when trimmed is not equal to an empty string return true.
+            // if value when trimmed is not equal to an empty string return true && isValid = True.
             isValid = value.trim() !== '' && isValid;
         }
 
         if (rules.minLength) {
+            // if value length is greater than or equal to 3 and isValid = true, then set isValid to true.
             isValid = value.length >= rules.minLength && isValid;
         }
 
         if (rules.maxLength) {
+            // If value length is less than or equal to 7 and isValid = true, then set isValid to true.
             isValid = value.length <= rules.maxLength && isValid;
         }
 
@@ -136,15 +140,21 @@ class ContactData extends Component {
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
+        // Pulling state of order form into variable
         const updatedOrderForm = {
             ...this.state.orderForm 
         };
+        // spreading order form by specific input
         const updatedFormElement = {
             ...updatedOrderForm[inputIdentifier]
         };
+        // orderform element value update by value input by user
         updatedFormElement.value = event.target.value;
+        // Checking order form element validity by comparing value and validation
         updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        // set state of form element from false to true (for styling reasons)
         updatedFormElement.touched = true;
+        // each updatedFormElement to be appended back to updatedOrderForm by specific element
         updatedOrderForm[inputIdentifier] = updatedFormElement;
 
         let formIsValid = true;
@@ -160,6 +170,7 @@ class ContactData extends Component {
 
     render() {
         const formElementsArray = [];
+        // for each key in order form, push id: key and orderForm[key] by specific element into formElementsArray 
         for (let key in this.state.orderForm) {
             formElementsArray.push({
                 id: key,
@@ -168,6 +179,7 @@ class ContactData extends Component {
         }
         let form = (
             <form onSubmit={this.orderHandler}>
+                {/* Map loop through all forElementArray items and render custom Input components */}
                 {formElementsArray.map(formElement => (
                     <Input 
                         key={formElement.id}
@@ -194,4 +206,11 @@ class ContactData extends Component {
     }
 }
 
-export default ContactData;
+const mapStateToProps = state => {
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice
+    }
+};
+
+export default connect(mapStateToProps)(ContactData);

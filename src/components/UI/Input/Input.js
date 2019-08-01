@@ -3,12 +3,15 @@ import classes from './Input.css';
 
 const input = (props) => {
     let inputElement = null;
+    // Input Element class set as initial CSS
     const inputClasses = [classes.InputElement];
-
+    
+    // if invalid AND shouldValidate AND touched are all true then push Invalid CCS class to inputs
     if (props.invalid && props.shouldValidate && props.touched) {
         inputClasses.push(classes.Invalid);
     }
 
+    // Dynamic switch statement to render input components from State on ContactData.js
     switch (props.elementType) {
         case ('input'): 
             inputElement = <input 

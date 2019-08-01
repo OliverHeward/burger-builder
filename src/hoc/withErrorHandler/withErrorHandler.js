@@ -33,6 +33,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
                         modalClosed={this.errorConfirmedHandler}>
                        {this.state.error ? this.state.error.message : null}
                     </Modal>
+                    {/* spreading props should help assist connect from redux to work fine */}
                     <WrappedComponent {...this.props}/>
                 </Aux>
             );
