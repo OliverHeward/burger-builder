@@ -4,7 +4,6 @@ import classes from './Burger.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const burger = (props) => {
-    console.log(props);
     // Transforming state object into array through Object.keys
     let transformedIngredients = Object.keys(props.ingredients).map(igKey => {
             // Spread operatorer for Array passing ingredients by Key and mapping within map.

@@ -8,6 +8,7 @@ import Input from '../../../components/UI/Input/Input';
 import Classes from './ContactData.css';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions/index';
+import { updateObject, checkValidity } from '../../../shared/utility';
 
 class ContactData extends Component {
     state = { 
@@ -113,55 +114,16 @@ class ContactData extends Component {
         this.props.onOrderBurger(order, this.props.token);
     }
 
-    checkValidity(value, rules) {
-        let isValid = true;
-
-        if (rules.required) {
-            // if value when trimmed is not equal to an empty string return true && isValid = True.
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if (rules.minLength) {
-            // if value length is greater than or equal to 3 and isValid = true, then set isValid to true.
-            isValid = value.length >= rules.minLength && isValid;
-        }
-
-        if (rules.maxLength) {
-            // If value length is less than or equal to 7 and isValid = true, then set isValid to true.
-            isValid = value.length <= rules.maxLength && isValid;
-        }
-
-        if (rules.isEmail) {
-            const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        if (rules.isNumeric) {
-            const pattern = /^\d+$/;
-            isValid = pattern.test(value) && isValid
-        }
-
-
-        return isValid;
-    }
-
     inputChangedHandler = (event, inputIdentifier) => {
-        // Pulling state of order form into variable
-        const updatedOrderForm = {
-            ...this.state.orderForm 
-        };
-        // spreading order form by specific input
-        const updatedFormElement = {
-            ...updatedOrderForm[inputIdentifier]
-        };
-        // orderform element value update by value input by user
-        updatedFormElement.value = event.target.value;
-        // Checking order form element validity by comparing value and validation
-        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
-        // set state of form element from false to true (for styling reasons)
-        updatedFormElement.touched = true;
-        // each updatedFormElement to be appended back to updatedOrderForm by specific element
-        updatedOrderForm[inputIdentifier] = updatedFormElement;
+        const updatedFormElement = updateObject(this.state.orderForm[inputIdentifier], {
+            value: event.target.value,
+            valid: checkValidity(event.target.value, this.state.orderForm[inputIdentifier].validation),
+            touched: true
+        });
+
+        const updatedOrderForm = updateObject(this.state.orderForm, {
+            [inputIdentifier]: updatedFormElement
+        });
 
         let formIsValid = true;
         for (let inputIdentifier in updatedOrderForm) {
