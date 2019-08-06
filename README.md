@@ -6,9 +6,9 @@ Another Version of this Application will be uploaded soon using the new React Ho
 
 ### Burger Build Online
 
-To view this version of the Application live on the internet please follow the link below
+To view this version of the Application live on the internet please click the link below or simply copy and paste the URL into your browser.
 
-[link](https://burger-build-11e2b.firebaseapp.com/)
+[link](https://burger-build-11e2b.firebaseapp.com/) - https://burger-build-11e2b.firebaseapp.com/
 
 ## Technologies & Packages
 
