@@ -1,8 +1,13 @@
-# The Burger Builder (underline)
+# The Burger Builder
 
 This version of the App is created using React. The overall state of the Application is controlled by Redux, but there are Class based components that still control state that are not dependant on the overall App.
 
 Another Version of this Application will be uploaded soon using the new React Hooks feature.
+
+### Burger Build Online
+
+To view this version of the Application live on the internet please follow the link below
+[link](https://burger-build-11e2b.firebaseapp.com/)
 
 ## Technologies & Packages
 
@@ -20,7 +25,10 @@ Another Version of this Application will be uploaded soon using the new React Ho
 
 ## Usage
 
-To run this Application locally on your device, you will need to run:
+To download this application - please use this command.
+` git clone https://github.com/OliverHeward/burger-builder.git `
+
+To begin running this Application locally on your device, you will need to run:
 ```
 npm install
 ```
@@ -29,6 +37,8 @@ This will install the dependancies required for the application that are saved w
 If this does not work out the box, please read any ERROR messages thrown by `npm` in the terminal.
 
 ## The Folder Structure
+
+After a successful `npm install`, your folder structure should look as shown below.
 
 ```
 burger-build/
