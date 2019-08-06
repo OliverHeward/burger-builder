@@ -36,7 +36,13 @@ npm install
 ```
 This will install the dependancies required for the application that are saved within package-lock && package.json.
 
-If this does not work out the box, please read any ERROR messages thrown by `npm` in the terminal.
+### Running the App
+
+Whilst inside the root directory of the Application, use the follow command to run the scripts that will start the application.
+
+` npm start `
+
+If this does not work out the box, please READ and FOLLOW any ERROR messages thrown by `npm` in the terminal.
 
 ## The Folder Structure
 
